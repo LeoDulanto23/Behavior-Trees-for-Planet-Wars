@@ -9,3 +9,10 @@ def have_largest_fleet(state):
              + sum(fleet.num_ships for fleet in state.my_fleets()) \
            > sum(planet.num_ships for planet in state.enemy_planets()) \
              + sum(fleet.num_ships for fleet in state.enemy_fleets())
+
+def if_under_attack(state):
+    logging.debug("Executing check: if_under_attack")
+    for planet in state.my_planets():
+        if any(fleet.destination_planet == planet.ID and fleet.owner != state.is_alive for fleet in state.enemy_fleets()):
+            return True
+    return False
