@@ -36,14 +36,14 @@ def setup_behavior_tree():
     spread_action = Action(spread_to_weakest_neutral_planet)
     spread_sequence.child_nodes = [neutral_planet_check, spread_action]
 
-    closest_plan = Sequence(name='Act From Closest Strategy')
+    closest_planet = Sequence(name='Closest Strategy')
     target_check = Check(if_enemy_planet_available)
-    closest_action = Action(attack_closest_planets)
+    closest_action = Action(attack_planets)
     closest_plan.child_nodes = [target_check, closest_action]
 
-    spread_and_attack = Sequence(name='Spread and Attack Strategy')
+    spread_and_attack = Sequence(name='Attack Further Strategy')
     possible_planet_check = Check(if_neutral_planet_available) or Check(if_enemy_planet_available)
-    spread_attack_action = Action(spread_and_attack_planets)
+    spread_attack_action = Action(attack_further_planets)
     spread_and_attack.child_nodes = [possible_planet_check, spread_attack_action]
     
     # defensive_plan = Sequence(name = 'Defensive Strategy')
