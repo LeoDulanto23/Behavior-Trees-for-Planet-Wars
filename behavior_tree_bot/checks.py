@@ -3,6 +3,9 @@
 def if_neutral_planet_available(state):
     return any(state.neutral_planets())
 
+def if_enemy_planet_avaliable(state):
+    return any(state.enemy_planets())
+
 
 def have_largest_fleet(state):
     return sum(planet.num_ships for planet in state.my_planets()) \
@@ -10,9 +13,3 @@ def have_largest_fleet(state):
            > sum(planet.num_ships for planet in state.enemy_planets()) \
              + sum(fleet.num_ships for fleet in state.enemy_fleets())
 
-def if_under_attack(state):
-    logging.debug("Executing check: if_under_attack")
-    for planet in state.my_planets():
-        if any(fleet.destination_planet == planet.ID and fleet.owner != state.is_alive for fleet in state.enemy_fleets()):
-            return True
-    return False
